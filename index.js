@@ -21,6 +21,6 @@ app.get('/', (req, res) => {
   res.send('bklasjdfklj');
 });
 
-app.listen(process.env.port || 8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log('Example app listening on port 8000!')
 });
