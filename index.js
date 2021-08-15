@@ -14,4 +14,7 @@ const publishMessage = (id, text) => {
     });
 }
 
-  publishMessage('#test-bots', 'Привет! Кто чем занимается сегодня?');
+  setInterval(() => {
+    publishMessage('#test-bots', 'Привет! Кто чем занимается сегодня?');
+  }, 75600000);
+  
