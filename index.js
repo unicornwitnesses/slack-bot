@@ -16,6 +16,10 @@ app.get('/notify', (req, res) => {
   res.send('Welcome to learn backend with express!')
 });
 
+app.get('/', (req, res) => {
+  res.send('bklasjdfklj');
+});
+
 app.listen(8000, () => {
   console.log('Example app listening on port 8000!')
 });
