@@ -1,7 +1,5 @@
 const { WebClient } = require("@slack/web-api");
 
-let isStarted = false;
-
 const client = new WebClient("xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP");
 
 const publishMessage = (id, text) => {
