@@ -5,5 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js"
+  },
+  "dependencies": {
+    "@slack/web-api": "^6.3.0"
   }
 }
