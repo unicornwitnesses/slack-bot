@@ -16,4 +16,4 @@ const publishMessage = (id, text) => {
     });
 }
 
-publishMessage('#test-bots', 'test');
+publishMessage('test-bots', 'test');
