@@ -15,6 +15,5 @@ const publishMessage = (id, text) => {
 }
 
   setInterval(() => {
-    publishMessage('#test-bots', 'Привет! Кто чем занимается сегодня?');
+    publishMessage('#activities', 'Привет! Кто чем занимается сегодня?');
   }, 75600000);
-  
