@@ -10,10 +10,11 @@ app.get('/notify', (req, res) => {
     text: 'Привет! Кто чем занимается сегодня?'
   })
   .then(result => console.log(result))
+  .then(() => res.send('Welcome to learn backend with express!'))
   .catch(err => {
     console.error(err, 'error');
+    res.send('bad')
   });
-  res.send('Welcome to learn backend with express!')
 });
 
 app.get('/', (req, res) => {
