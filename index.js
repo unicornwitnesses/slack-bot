@@ -6,7 +6,7 @@ app.get('/notify', (req, res) => {
   const channel = req.query.channel;
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
   const client = new WebClient("xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP");
-
+  console.log(req, 'req');
   if (!channel) return;
 
   client.chat.postMessage({
