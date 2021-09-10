@@ -40,18 +40,12 @@ app.get('/notify_test', (req, res) => {
       token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
       channel: `#${channel}`,
       text: message,
-    })
-      .then(result => console.log(result))
-      .then(() => res.status(200).json({
-        message: 'Message sent successfully',
-      }))
-      .catch(err => {
-        console.error(err, 'error');
-        res.status(500).json({
-          error: err.message,
-        });
-      });
+    });
   }, 60000);
+
+  res.status(200).json({
+    message: 'started',
+  });
 });
 
 app.get('/notify_test_stop', (req, res) => {
