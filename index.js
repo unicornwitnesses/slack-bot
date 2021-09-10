@@ -56,9 +56,14 @@ app.get('/notify_test', (req, res) => {
 });
 
 app.get('/notify_test_stop', (req, res) => {
-  clearInterval(intervalId);
-
-  res.status(200);
+  try {
+    if (intervalId) {
+      clearInterval(intervalId);
+      res.status(200);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 app.get('/say', (req, res) => {
