@@ -52,17 +52,21 @@ app.get('/notify_test', (req, res) => {
           error: err.message,
         });
       });
-  }, 10000);
+  }, 2900000);
 });
 
 app.get('/notify_test_stop', (req, res) => {
   try {
     if (intervalId) {
       clearInterval(intervalId);
-      res.status(200);
+      res.status(200).json({
+        message: 'good',
+      });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({
+      message: err.message,
+    });
   }
 });
 
