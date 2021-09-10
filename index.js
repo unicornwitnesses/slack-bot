@@ -2,6 +2,8 @@ const { WebClient } = require("@slack/web-api");
 const express = require('express')
 const app = express();
 
+let intervalId;
+
 app.get('/notify', (req, res) => {
   const channel = req.query.channel;
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
@@ -34,7 +36,7 @@ app.get('/notify_test', (req, res) => {
   if (!channel) return;
 
 
-  setInterval(() => {
+  intervalId = setInterval(() => {
     client.chat.postMessage({
       token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
       channel: `#${channel}`,
@@ -53,8 +55,10 @@ app.get('/notify_test', (req, res) => {
   }, 10000);
 });
 
-app.get('/notify-test', (req, res) => {
+app.get('/notify_test_stop', (req, res) => {
+  clearInterval(intervalId);
 
+  res.status(200);
 });
 
 app.get('/say', (req, res) => {
