@@ -26,6 +26,33 @@ app.get('/notify', (req, res) => {
     });
 });
 
+app.get('/notify_test', (req, res) => {
+  const channel = 'test-bot';
+  const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
+  const client = new WebClient("xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP");
+  console.log(req, 'req');
+  if (!channel) return;
+
+
+  setInterval(() => {
+    client.chat.postMessage({
+      token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
+      channel: `#${channel}`,
+      text: message,
+    })
+      .then(result => console.log(result))
+      .then(() => res.status(200).json({
+        message: 'Message sent successfully',
+      }))
+      .catch(err => {
+        console.error(err, 'error');
+        res.status(500).json({
+          error: err.message,
+        });
+      });
+  }, 10000);
+});
+
 app.get('/notify-test', (req, res) => {
 
 });
