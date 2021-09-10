@@ -51,7 +51,7 @@ app.get('/notify_test', (req, res) => {
           error: err.message,
         });
       });
-  }, 2900000);
+  }, 60000);
 });
 
 app.get('/notify_test_stop', (req, res) => {
