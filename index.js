@@ -35,12 +35,6 @@ app.get('/notify_test', (req, res) => {
   console.log(req, 'req');
   if (!channel) return;
 
-  client.chat.postMessage({
-    token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
-    channel: `#${channel}`,
-    text: message,
-  });
-
   intervalId = setInterval(() => {
     client.chat.postMessage({
       token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
@@ -57,7 +51,7 @@ app.get('/notify_test', (req, res) => {
           error: err.message,
         });
       });
-  }, 30000);
+  }, 2900000);
 });
 
 app.get('/notify_test_stop', (req, res) => {
