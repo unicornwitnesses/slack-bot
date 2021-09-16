@@ -2,6 +2,7 @@ const { WebClient } = require("@slack/web-api");
 const express = require('express')
 const app = express();
 
+let testIntervalId;
 let intervalId;
 
 app.get('/notify', (req, res) => {
@@ -56,7 +57,7 @@ app.get('/notify_test', (req, res) => {
 
 app.get('/notify_test_stop', (req, res) => {
   try {
-    if (intervalId) {
+    if (testIntervalId) {
       clearInterval(intervalId);
       res.status(200).json({
         message: 'good',
