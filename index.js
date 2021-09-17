@@ -32,6 +32,43 @@ app.get('/notify', (req, res) => {
     });
 });
 
+app.get('/notify_repeat', (req, res) => {
+  const channel = 'daily-reports';
+  const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
+  const client = new WebClient(AUTH_TOKEN);
+
+  if (!channel) return;
+
+  intervalId = setInterval(() => {
+    if (new Date().getUTCHours() === 7) {
+      client.chat.postMessage({
+        token: AUTH_TOKEN,
+        channel: `#${channel}`,
+        text: message,
+      });
+    }
+  }, 1000 * 60);
+
+  res.status(200).json({
+    message: 'started',
+  });
+});
+
+app.get('/notify_repeat_stop', (req, res) => {
+  try {
+    if (intervalId) {
+      clearInterval(intervalId);
+      res.status(200).json({
+        message: 'good',
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+});
+
 app.get('/notify_test', (req, res) => {
   const channel = 'test-bot';
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
@@ -40,14 +77,14 @@ app.get('/notify_test', (req, res) => {
   if (!channel) return;
 
   intervalId = setInterval(() => {
-    if (new Date().getUTCHours() === 12 && new Date().getMinutes() === 6 && new Date().getSeconds() === 0) {
+    if (new Date().getUTCHours() === 12) {
       client.chat.postMessage({
         token: AUTH_TOKEN,
         channel: `#${channel}`,
         text: message,
       });
     }
-  }, 1000);
+  }, 1000 * 60);
 
   res.status(200).json({
     message: 'started',
