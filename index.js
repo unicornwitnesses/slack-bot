@@ -46,12 +46,14 @@ app.get('/notify_test', (req, res) => {
   });
   
   intervalId = setInterval(() => {
-    client.chat.postMessage({
-      token: AUTH_TOKEN,
-      channel: `#${channel}`,
-      text: message,
-    });
-  }, 60000);
+    if (new Date().getUTCHours() === 11 && new Date().getMinutes() === 59) {
+      client.chat.postMessage({
+        token: AUTH_TOKEN,
+        channel: `#${channel}`,
+        text: message,
+      });
+    }
+  }, 10000);
 
   res.status(200).json({
     message: 'started',
