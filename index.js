@@ -47,7 +47,7 @@ app.get('/notify_repeat', (req, res) => {
         text: message,
       });
     }
-  }, 1000 * 60);
+  }, 1000 * 60 * 60);
 
   res.status(200).json({
     message: 'started',
@@ -84,7 +84,7 @@ app.get('/notify_test', (req, res) => {
         text: message,
       });
     }
-  }, 1000 * 60);
+  }, 1000 * 60 * 60);
 
   res.status(200).json({
     message: 'started',
