@@ -39,7 +39,7 @@ app.get('/notify_test', (req, res) => {
   if (!channel) return;
 
   client.chat.postMessage({
-    token: process.env.,
+    token: AUTH_TOKEN,
     channel: `#${channel}`,
     text: message,
   });
