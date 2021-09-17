@@ -111,7 +111,7 @@ app.get('/say', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('bklasjdfklj');
+  res.send('Not found');
 });
 
 app.listen(process.env.PORT || 8000, () => {
