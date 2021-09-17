@@ -41,7 +41,7 @@ app.get('/notify_test', (req, res) => {
     channel: `#${channel}`,
     text: message,
   });
-
+  f
   intervalId = setInterval(() => {
     client.chat.postMessage({
       token: "xoxb-468242695412-2394252523313-ngzIo7r5McIYGzTlzEzTiwnA",
