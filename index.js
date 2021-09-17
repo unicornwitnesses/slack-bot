@@ -1,6 +1,9 @@
 const { WebClient } = require("@slack/web-api");
 const express = require('express')
 const app = express();
+require('dotenv').config();
+
+const AUTH_KEY = process.env.AUTH_KEY;
 
 let testIntervalId;
 let intervalId;
@@ -8,12 +11,12 @@ let intervalId;
 app.get('/notify', (req, res) => {
   const channel = req.query.channel;
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
-  const client = new WebClient("xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP");
+  const client = new WebClient(AUTH_KEY);
   console.log(req, 'req');
   if (!channel) return;
 
   client.chat.postMessage({
-    token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
+    token: AUTH_KEY,
     channel: `#${channel}`,
     text: message,
   })
@@ -32,19 +35,19 @@ app.get('/notify', (req, res) => {
 app.get('/notify_test', (req, res) => {
   const channel = 'test-bot';
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
-  const client = new WebClient("xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP");
+  const client = new WebClient(AUTH_KEY);
   console.log(req, 'req');
   if (!channel) return;
 
   client.chat.postMessage({
-    token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
+    token: AUTH_KEY,
     channel: `#${channel}`,
     text: message,
   });
 
   intervalId = setInterval(() => {
     client.chat.postMessage({
-      token: "xoxb-468242695412-2394252523313-F1U34u14bNYWRv5ohoONKAFP",
+      token: AUTH_KEY,
       channel: `#${channel}`,
       text: message,
     });
