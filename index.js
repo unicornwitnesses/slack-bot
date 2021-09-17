@@ -40,7 +40,7 @@ app.get('/notify_test', (req, res) => {
   if (!channel) return;
 
   intervalId = setInterval(() => {
-    if (new Date().getUTCHours() === 12 && new Date().getMinutes() === 4 && new Date().getSeconds() === 0) {
+    if (new Date().getUTCHours() === 12 && new Date().getMinutes() === 6 && new Date().getSeconds() === 0) {
       client.chat.postMessage({
         token: AUTH_TOKEN,
         channel: `#${channel}`,
