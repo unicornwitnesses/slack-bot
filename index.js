@@ -47,7 +47,7 @@ app.get('/notify_test', (req, res) => {
         text: message,
       });
     }
-  }, 10000);
+  }, 1000);
 
   res.status(200).json({
     message: 'started',
