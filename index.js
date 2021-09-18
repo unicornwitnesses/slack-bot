@@ -82,16 +82,22 @@ app.get('/notify_test', (req, res) => {
 
   if (!channel) return;
 
-  intervalId = setInterval(() => {
-    if (new Date().getUTCHours() === 12) {
-      const client = new WebClient(AUTH_TOKEN);
+  const sendMessage = () => {
+    console.log('called');
+    if (new Date().getUTCHours() === 9 && new Date().getUTCMinutes() === 10) {
+      const client = new WebClient(AUTH_TOKEN, {
+        logLevel: LogLevel.DEBUG,
+      });
+      console.log('worked');
       client.chat.postMessage({
         token: AUTH_TOKEN,
         channel: `#${channel}`,
         text: message,
       });
     }
-  }, 1000 * 60 * 60);
+  };
+
+  intervalId = setInterval(sendMessage, 1000 * 60);
 
   res.status(200).json({
     message: 'started',
