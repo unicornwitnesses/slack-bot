@@ -3,6 +3,8 @@ const express = require('express')
 const app = express();
 require('dotenv').config();
 
+const client = new WebClient(AUTH_TOKEN);
+
 let testIntervalId;
 let intervalId;
 
@@ -33,14 +35,15 @@ app.get('/notify', (req, res) => {
 });
 
 app.get('/notify_repeat', (req, res) => {
-  const channel = 'daily-reports';
+  const channel = req.query.channel || 'daily-reports';
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
-  const client = new WebClient(AUTH_TOKEN);
 
   if (!channel) return;
 
   intervalId = setInterval(() => {
-    if (new Date().getUTCHours() === 7) {
+    console.log('time');
+    if (new Date().getUTCHours() === 9) {
+      console.log('worked');
       client.chat.postMessage({
         token: AUTH_TOKEN,
         channel: `#${channel}`,
@@ -56,6 +59,7 @@ app.get('/notify_repeat', (req, res) => {
 
 app.get('/notify_repeat_stop', (req, res) => {
   try {
+    console.log('intervalId', intervalId);
     if (intervalId) {
       clearInterval(intervalId);
       res.status(200).json({
