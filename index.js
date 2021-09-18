@@ -40,7 +40,7 @@ app.get('/notify_repeat', (req, res) => {
 
   const sendMessage = () => {
     console.log('called');
-    if (new Date().getUTCHours() === 9 && new Date().getUTCMinutes() === 10) {
+    if (new Date().getUTCHours() === 9 && new Date().getUTCMinutes() === 15) {
       const client = new WebClient(AUTH_TOKEN, {
         logLevel: LogLevel.DEBUG,
       });
