@@ -101,7 +101,7 @@ app.get('/notify_test', (req, res) => {
     const channel = 'test-bot';
     const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
     const secret = req.query.secret;
-
+    console.log(secret, SECRET);
     if (!secret && secret !== SECRET) {
       throw new Error('Wrong secret key');
     };
