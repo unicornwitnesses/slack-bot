@@ -1,9 +1,7 @@
-const { WebClient } = require("@slack/web-api");
+const { WebClient, LogLevel } = require("@slack/web-api");
 const express = require('express')
 const app = express();
 require('dotenv').config();
-
-const client = new WebClient(AUTH_TOKEN);
 
 let testIntervalId;
 let intervalId;
@@ -43,6 +41,9 @@ app.get('/notify_repeat', (req, res) => {
   intervalId = setInterval(() => {
     console.log('time');
     if (new Date().getUTCHours() === 9) {
+      const client = new WebClient(AUTH_TOKEN, {
+        logLevel: LogLevel.DEBUG,
+      });
       console.log('worked');
       client.chat.postMessage({
         token: AUTH_TOKEN,
@@ -76,12 +77,13 @@ app.get('/notify_repeat_stop', (req, res) => {
 app.get('/notify_test', (req, res) => {
   const channel = 'test-bot';
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
-  const client = new WebClient(AUTH_TOKEN);
+
   console.log(req, 'req');
   if (!channel) return;
 
   intervalId = setInterval(() => {
     if (new Date().getUTCHours() === 12) {
+      const client = new WebClient(AUTH_TOKEN);
       client.chat.postMessage({
         token: AUTH_TOKEN,
         channel: `#${channel}`,
