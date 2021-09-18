@@ -38,9 +38,9 @@ app.get('/notify_repeat', (req, res) => {
 
   if (!channel) return;
 
-  intervalId = setInterval(() => {
-    console.log('time');
-    if (new Date().getUTCHours() === 9) {
+  const sendMessage = () => {
+    console.log('called');
+    if (new Date().getUTCHours() === 9 && new Date().getUTCMinutes() === 10) {
       const client = new WebClient(AUTH_TOKEN, {
         logLevel: LogLevel.DEBUG,
       });
@@ -51,8 +51,10 @@ app.get('/notify_repeat', (req, res) => {
         text: message,
       });
     }
-  }, 1000 * 60 * 60);
+  };
 
+  intervalId = setInterval(sendMessage, 1000 * 60);
+  console.log()
   res.status(200).json({
     message: 'started',
   });
@@ -78,7 +80,6 @@ app.get('/notify_test', (req, res) => {
   const channel = 'test-bot';
   const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
 
-  console.log(req, 'req');
   if (!channel) return;
 
   intervalId = setInterval(() => {
