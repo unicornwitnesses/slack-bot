@@ -15,7 +15,7 @@ app.get('/notify', (req, res) => {
     const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
     const secret = req.query.secret;
 
-    if (secret !== SECRET) {
+    if (!secret && secret !== SECRET) {
       throw new Error('Wrong secret key');
     }
 
@@ -40,7 +40,7 @@ app.get('/notify_repeat', (req, res) => {
     const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
     const secret = req.query.secret;
 
-    if (secret !== SECRET) {
+    if (!secret && secret !== SECRET) {
       throw new Error('Wrong secret key');
     };
 
@@ -78,7 +78,7 @@ app.get('/notify_repeat_stop', (req, res) => {
   try {
     const secret = req.query.secret;
 
-    if (secret !== SECRET) {
+    if (!secret && secret !== SECRET) {
       throw new Error('Wrong secret key');
     };
 
@@ -102,7 +102,7 @@ app.get('/notify_test', (req, res) => {
     const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
     const secret = req.query.secret;
 
-    if (secret !== SECRET) {
+    if (!secret && secret !== SECRET) {
       throw new Error('Wrong secret key');
     };
 
@@ -137,7 +137,7 @@ app.get('/notify_test_stop', (req, res) => {
   try {
     const secret = req.query.secret;
 
-    if (secret !== SECRET) {
+    if (!secret && secret !== SECRET) {
       throw new Error('Wrong secret key');
     };
 
