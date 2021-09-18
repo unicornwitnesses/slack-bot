@@ -15,7 +15,7 @@ app.get('/notify', (req, res) => {
     const message = req.query.message || 'Привет! Кто чем занимается сегодня?';
     const secret = req.query.secret;
 
-    if (!channel || secret !== SECRET) {
+    if (secret !== SECRET) {
       throw new Error('Wrong secret key');
     }
 
