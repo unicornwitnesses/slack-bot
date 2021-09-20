@@ -9,6 +9,24 @@ let intervalId;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const SECRET = process.env.SECRET;
 
+const sendMessage = (channel, message) => {
+  console.log('called');
+
+  if (new Date().getUTCHours() === 7 && new Date().getUTCMinutes() === 0) {
+    const client = new WebClient(AUTH_TOKEN, {
+      logLevel: LogLevel.DEBUG,
+    });
+
+    console.log('worked');
+
+    client.chat.postMessage({
+      token: AUTH_TOKEN,
+      channel: `#${channel}`,
+      text: message,
+    });
+  }
+};
+
 app.get('/notify', (req, res) => {
   try {
     const channel = req.query.channel;
@@ -44,29 +62,15 @@ app.get('/notify_repeat', (req, res) => {
       throw new Error('Wrong secret key');
     };
 
-    const sendMessage = () => {
-      console.log('called');
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
 
-      if (new Date().getUTCHours() === 7 && new Date().getUTCMinutes() === 0) {
-        const client = new WebClient(AUTH_TOKEN, {
-          logLevel: LogLevel.DEBUG,
-        });
-
-        console.log('worked');
-
-        client.chat.postMessage({
-          token: AUTH_TOKEN,
-          channel: `#${channel}`,
-          text: message,
-        });
-      }
-    };
-
-    intervalId = setInterval(sendMessage, 1000 * 60);
-
+    intervalId = setInterval(() => sendMessage(channel, message), 1000 * 60);
     res.status(200).json({
       message: 'Started notifiying successfully',
     });
+
   } catch (err) {
     res.status(500).json({
       message: err,
@@ -161,3 +165,5 @@ app.get('/', (req, res) => {
 app.listen(process.env.PORT || 8000, () => {
   console.log('Started listening on port: ', process.env.PORT);
 });
+
+intervalId = setInterval(() => sendMessage('daily-reports', 'Привет! Кто что делает сегодня?'), 1000 * 60);
